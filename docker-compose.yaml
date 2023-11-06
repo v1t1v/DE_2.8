@@ -1,0 +1,22 @@
+version: "3.8"
+name: task-2-8-1t
+services:
+  clickhouse:
+    image: clickhouse/clickhouse-server:latest
+    container_name: task-2-8-1t
+    networks:
+        - clickhouse
+    ulimits:
+        nofile:
+          soft: 262144
+          hard: 262144 
+    ports:
+      - "8123:8123"
+    volumes:
+      - vol-2-8:/var/lib/clickhouse
+      - ./initdb:/docker-entrypoint-initdb.d
+
+volumes:
+  vol-2-8:
+networks:
+  clickhouse:
